@@ -114,6 +114,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat adit'))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Apa?'))
+    if text=="test":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='?'))
     if text=="mail":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat mail'))
     if text=="djohan":
