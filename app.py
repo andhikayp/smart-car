@@ -55,7 +55,7 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-     if text=="Zaky":
+    if text=="Zaky":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Harlen punya'))
     if text=="HTML":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Markup Language'))
@@ -75,8 +75,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Marketing'))
     if text=="SEO":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
-    if text=="@Zaky":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='a'))
+   
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
