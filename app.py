@@ -55,20 +55,30 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
+     if text=="Zaky":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Harlen punya'))
     if text=="HTML":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Markup Language'))
-    if text=="rey":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Apa?'))
-    if text=="test":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='?'))
-    if text=="ip 4":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Andhika'))
-    if text=="AudioMessage":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Andhika'))
-    if text=="mail":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat mail'))
-    if text=="djohan":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kamu jahat djohan'))
+    if text=="CSS":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Cascading Style Sheet'))
+    if text=="ROM":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Read Only Memory'))
+    if text=="RAM":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Random Access Memory'))
+    if text=="API":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Application Programming Interface'))
+    if text=="DNS":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Domain Name System'))
+    if text=="HTTP":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Transfer Protocol'))
+    if text=="SEM":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Marketing'))
+    if text=="SEO":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
+    if text=="@Zaky":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Nama : Zaky Thariq\nJurusan / Fakultas / Angkatan : Informatika / FTIK / 2017\nKelebihan : Sabar, pintar main silat, mantan calon mawapres\nKekurangan : Susah mengidentifikasi cewek cakep\nHobi : Ikut gemastik tiap tahun, naik suroboyo bus di bunderan ITS\nSosmed : IG : zakythr'))
+    if text=="":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=''))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
