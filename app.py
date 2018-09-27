@@ -76,7 +76,7 @@ def handle_message(event):
     if text=="SEO":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
     if text=="@Zaky":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Nama : Zaky Thariq\nJurusan / Fakultas / Angkatan : Informatika / FTIK / 2017\nKelebihan : Sabar, pintar main silat, mantan calon mawapres\nKekurangan : Susah mengidentifikasi cewek cakep\nHobi : Ikut gemastik tiap tahun, naik suroboyo bus di bunderan ITS\nSosmed : IG : zakythr'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Nama : Zaky Thariq \nJurusan / Fakultas / Angkatan : Informatika / FTIK / 2017 \nKelebihan : Sabar, pintar main silat, mantan calon mawapres \nKekurangan : Susah mengidentifikasi cewek cakep \nHobi : Ikut gemastik tiap tahun, naik suroboyo bus di bunderan ITS \nSosmed : IG : zakythr'))
     if text=="":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=''))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
