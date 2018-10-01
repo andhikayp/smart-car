@@ -75,6 +75,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Marketing'))
     if text=="SEO":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo'))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='http://andhikay24.000webhostapp.com/fb1.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     #if text=="tayo":
