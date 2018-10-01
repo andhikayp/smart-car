@@ -76,7 +76,7 @@ def handle_message(event):
     if text=="SEO":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
     if text=="rey":
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://www.instagram.com/p/BfueNbbH6BE/?utm_source=ig_web_button_share_sheet',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
 
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
