@@ -7,8 +7,10 @@ from linebot.exceptions import (
 )
 from linebot.models import *
 import requests, json
+
 import errno
 import os
+#import datetime
 import sys, random
 import tempfile
 import requests
@@ -55,6 +57,8 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
+    if text=="date":
+        line_bot_api.reply_message(event.reply_token,TextSendMessage())
     if text=="Zaky":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Harlen punya'))
     if text=="HTML":
@@ -75,16 +79,22 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Marketing'))
     if text=="SEO":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo'))
     if text=="rey":
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='http://andhikay24.000webhostapp.com/fb1.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
-    #if text=="tayo":
-        #line_bot_api.reply_message(event.reply_token,VideoSendMessage(original_content_url='https://example.com/original.mp4',preview_image_url='https://example.com/preview.jpg'))
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
+    if text=="bye":
+        if isinstance(event.source, SourceGroup):
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
+            line_bot_api.leave_group(event.source.group_id)
+        elif isinstance(event.source, SourceRoom):
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
+            line_bot_api.leave_room(event.source.room_id)
+        else:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
     #line_bot_api.push_message('U8d343d76a1c15caad6dba2d2b5dab241', TextSendMessage(text='Hello World!'))
-    line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
+    #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
 
 import os
 
