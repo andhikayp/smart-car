@@ -58,7 +58,7 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
     if text=="date":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage())
+        print("now")
     if text=="Zaky":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Harlen punya'))
     if text=="HTML":
@@ -86,7 +86,7 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving multiple chat room'))
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
