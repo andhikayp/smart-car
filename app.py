@@ -77,6 +77,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
+    if text=="ITS":
+        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='my location', address='ITS',latitude=-7.281476,longitude=112.794884))
     if text=="bye":
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
@@ -86,28 +88,7 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
-    elif text == '/template':
-        buttons_template = TemplateSendMessage(
-            alt_text='template',
-            template=ButtonsTemplate(
-                title='[ TEMPLATE MSG ]',
-                text= 'Tap the Button',
-                actions=[
-                    MessageTemplateAction(
-                        label='Culum 1',
-                        text='/aditmadzs'
-                    ),
-                    MessageTemplateAction(
-                        label='CULUM 2',
-                        text='/aditmadzs'
-                    ),
-                    MessageTemplateAction(
-                        label='CULUM 3',
-                        text='/aditmadzs'
-                    )
-                ]
-            )
-        )
+
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
