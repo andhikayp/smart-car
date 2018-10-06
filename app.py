@@ -77,8 +77,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
-    if text=="ITS":
-        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='my location', address='ITS',latitude=-7.281476,longitude=112.794884))
+    if text=="Google Center":
+        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
     if text=="bye":
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
@@ -88,7 +88,8 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
-
+    if text=="tes":
+        line_bot_api.reply_message(event.reply_token,StickerSendMessage(package_id='1000958',sticker_id='1'))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
