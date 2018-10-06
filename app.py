@@ -57,10 +57,6 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    if text=="date":
-        print("now")
-    if text=="Zaky":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Harlen punya'))
     if text=="HTML":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Markup Language'))
     if text=="CSS":
@@ -90,6 +86,28 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
+    elif text == '/template':
+        buttons_template = TemplateSendMessage(
+            alt_text='template',
+            template=ButtonsTemplate(
+                title='[ TEMPLATE MSG ]',
+                text= 'Tap the Button',
+                actions=[
+                    MessageTemplateAction(
+                        label='Culum 1',
+                        text='/aditmadzs'
+                    ),
+                    MessageTemplateAction(
+                        label='CULUM 2',
+                        text='/aditmadzs'
+                    ),
+                    MessageTemplateAction(
+                        label='CULUM 3',
+                        text='/aditmadzs'
+                    )
+                ]
+            )
+        )
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
