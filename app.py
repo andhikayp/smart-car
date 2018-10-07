@@ -88,10 +88,9 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else:
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
-    if text=="tes":
-        line_bot_api.reply_message(event.reply_token,StickerSendMessage(package_id='1000958',sticker_id='1'))
+    else:
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Kata kunci '+event.message.text+' belum tersedia. Ketik "menu" untuk menampilkan semua kata kunci yang ada'))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
-    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=event.message.text))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
     #line_bot_api.push_message('U8d343d76a1c15caad6dba2d2b5dab241', TextSendMessage(text='Hello World!'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
