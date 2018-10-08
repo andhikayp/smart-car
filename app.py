@@ -172,8 +172,7 @@ def handle_message(event):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     elif text=="/bye":
-        sad="Pingin ngekick aku?:(\nketik "/start" gawe ngekick!"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=sad))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
