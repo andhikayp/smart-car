@@ -180,12 +180,11 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko room iki!'))
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_room(event.source.room_id)
-        else:
+        else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
-    else:
+    elif isinstance(event.source, SourceGroup) and isinstance(event.source, SourceRoom):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Kata kunci "'+event.message.text+'" belum tersedia. Ketik "menu" untuk menampilkan semua kata kunci yang ada'))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
