@@ -171,16 +171,20 @@ def handle_message(event):
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-    
     elif text=="/bye":
+        sad="Pingin ngekick aku?:(\nketik "/start" gawe ngekick!"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=sad))
+    elif text=="/start":
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving multiple chat room'))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko room iki!'))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_room(event.source.room_id)
         else:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Bot can't leave from 1:1 chat"))
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     else:
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Kata kunci "'+event.message.text+'" belum tersedia. Ketik "menu" untuk menampilkan semua kata kunci yang ada'))
     #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
