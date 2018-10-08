@@ -179,11 +179,11 @@ def handle_message(event):
         i = 1
         while i < 6:
             if isinstance(event.source, SourceGroup):
-                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=event.message.text))
-            elif isinstance(event.source, SourceRoom):
-                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=event.message.spam))
-            else:
-                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=+event.message.text+))
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=spam))
+           # elif isinstance(event.source, SourceRoom):
+            #    line_bot_api.push_message(event.source.room_id,TextSendMessage(text=event.message.spam))
+            #else:
+             #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=+event.message.text+))
             i =i+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
