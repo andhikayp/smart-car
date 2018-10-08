@@ -151,8 +151,7 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
     if text=="HTML":
         inia="Hypertext"
-        inib="Markup"
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=inia,inib))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=inia))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
