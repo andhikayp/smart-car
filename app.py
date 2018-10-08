@@ -151,22 +151,7 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
     if text=="HTML":
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Markup Language'))
-    if text=="CSS":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Cascading Style Sheet'))
-    if text=="ROM":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Read Only Memory'))
-    if text=="RAM":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Random Access Memory'))
-    if text=="API":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Application Programming Interface'))
-    if text=="DNS":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Domain Name System'))
-    if text=="HTTP":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Transfer Protocol'))
-    if text=="SEM":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Marketing'))
-    if text=="SEO":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Search Engine Optimization'))
+    
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
@@ -187,9 +172,9 @@ def handle_message(event):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     
-    elif text=="bye":
+    elif text=="/bye":
         if isinstance(event.source, SourceGroup):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving group'))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Leaving multiple chat room'))
