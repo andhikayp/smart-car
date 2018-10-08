@@ -177,7 +177,12 @@ def handle_message(event):
     elif text=="/spam":
         i = 1
         while i < 6:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+            if isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+            elif isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
             i =i+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
