@@ -150,8 +150,9 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
     if text=="HTML":
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hypertext Markup Language'))
-    
+        inia="Hypertext"
+        inib="Markup"
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=inia,inib))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
@@ -176,7 +177,6 @@ def handle_message(event):
     elif text=="/start":
         if isinstance(event.source, SourceGroup):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko room iki!'))
