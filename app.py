@@ -160,11 +160,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
     #if text=="5":
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text=(type)event.message.text))
-    if text=="/spam":
-        i = 1
-        while i < 6:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
-            i += 1
     data=text.split('-') #pemisah
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
@@ -179,6 +174,11 @@ def handle_message(event):
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+    elif text=="/spam":
+        i = 1
+        while i < 6:
+            print ("DIREAD DOANG, BALES WOI!")
+            i =i+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
