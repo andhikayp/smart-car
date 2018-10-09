@@ -41,8 +41,8 @@ handler = WebhookHandler('b38e05865272e44156c19da5d5191c83')
 notes = {}
 
 #REQUEST DATA MHS
-def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nrp=" + nmr
+def carimhs(nmr):
+    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nmr=" + nmr
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
@@ -73,62 +73,6 @@ def inputmhs(nmr, sangar):
     elif(flag == "0"):
         return 'Data gagal dimasukkan\n'
 
-def allmhs():
-    r = requests.post("http://www.aditmasih.tk/api-hafid/all.php")
-    data = r.json()
-
-    flag = data['flag']
-   
-    if(flag == "1"):
-        hasil = ""
-        for i in range(0,len(data['data_angkatan'])):
-            nrp = data['data_angkatan'][int(i)][0]
-            nama = data['data_angkatan'][int(i)][2]
-            kos = data['data_angkatan'][int(i)][4]
-            hasil=hasil+str(i+1)
-            hasil=hasil+".\nNrp : "
-            hasil=hasil+nrp
-            hasil=hasil+"\nNama : "
-            hasil=hasil+nama
-            hasil=hasil+"\nKosan : "
-            hasil=hasil+kos
-            hasil=hasil+"\n"
-        return hasil
-    elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
-
-
-#DELETE DATA MHS
-def hapusmhs(nrp):
-    r = requests.post("http://www.aditmasih.tk/api-hafid/delete.php", data={'nrp': nrp})
-    data = r.json()
-
-    flag = data['flag']
-   
-    if(flag == "1"):
-        return 'Data '+nrp+' berhasil dihapus\n'
-    elif(flag == "0"):
-        return 'Data gagal dihapus\n'
-
-def updatemhs(nrpLama,nrp,nama,kosan):
-    URLmhs = "http://www.aditmasih.tk/api-hafid/show.php?nrp=" + nrpLama
-    r = requests.get(URLmhs)
-    data = r.json()
-    err = "data tidak ditemukan"
-    nrp_lama=nrpLama
-    flag = data['flag']
-    if(flag == "1"):
-        r = requests.post("http://www.aditmasih.tk/api-hafid/update.php", data={'nrp': nrp, 'nama': nama, 'kosan': kosan, 'nrp_lama':nrp_lama})
-        data = r.json()
-        flag = data['flag']
-
-        if(flag == "1"):
-            return 'Data '+nrp_lama+'berhasil diupdate\n'
-        elif(flag == "0"):
-            return 'Data gagal diupdate\n'
-
-    elif(flag == "0"):
-        return err
 
 # Post Request
 @app.route("/callback", methods=['POST'])
