@@ -42,20 +42,19 @@ notes = {}
 
 #REQUEST DATA MHS
 def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api-hafid/show.php?nrp=" + nrp
+    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nrp=" + Id
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
     
     flag = data['flag']
     if(flag == "1"):
-        nrp = data['data_angkatan'][0]['nrp']
-        nama = data['data_angkatan'][0]['nama']
-        kos = data['data_angkatan'][0]['kosan']
+        Id = data['data_angkatan'][0]['Id']
+        Sangar = data['data_angkatan'][0]['Sangar']
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Nama : "+nama+"\nNrp : "+nrp+"\nKosan : "+kos
+        data= "Id : "+Id+"\n"+Sangar+
         return data
         # return all_data
 
