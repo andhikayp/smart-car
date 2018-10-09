@@ -41,25 +41,6 @@ handler = WebhookHandler('b38e05865272e44156c19da5d5191c83')
 notes = {}
 
 #REQUEST DATA MHS
-def carimhs(nmr):
-    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nmr=" + nmr
-    r = requests.get(URLmhs)
-    data = r.json()
-    err = "data tidak ditemukan"
-    
-    flag = data['flag']
-    if(flag == "1"):
-        nmr = data['data_angkatan'][0]['nmr']
-        sangar = data['data_angkatan'][0]['sangar']
-
-        # munculin semua, ga rapi, ada 'u' nya
-        # all_data = data['data_angkatan'][0]
-        data= "Id : "+nmr+"\n"+sangar+
-        return data
-        # return all_data
-
-    elif(flag == "0"):
-        return err
 
 #INPUT DATA MHS
 def inputmhs(nmr, sangar):
