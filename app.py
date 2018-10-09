@@ -63,12 +63,10 @@ def carimhs(nrp):
         return err
 
 #INPUT DATA MHS
-def inputmhs(nrp, nama, kosan):
-    r = requests.post("http://www.aditmasih.tk/api-hafid/insert.php", data={'nrp': nrp, 'nama': nama, 'kosan': kosan})
+def inputmhs(sangar):
+    r = requests.post("http://www.aditmasih.tk/api-hafid/insert.php", data={'sangar': sangar})
     data = r.json()
-
     flag = data['flag']
-   
     if(flag == "1"):
         return 'Data '+nama+' berhasil dimasukkan\n'
     elif(flag == "0"):
@@ -164,15 +162,9 @@ def handle_message(event):
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
-    elif(data[0]=='hapus'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
-    elif(data[0]=='ganti'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
-    elif(data[0]=='semwa'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1])))
     elif(data[0]=='menu'):
-        menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
+        menu = "1. lihat-[nrp]\n2. tambah-[sangar]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     elif text=="/spam":
         i = 1
@@ -189,10 +181,11 @@ def handle_message(event):
     elif text=="/start":
         if isinstance(event.source, SourceGroup):
             line_bot_api.push_message(event.source.group_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_room(event.source.room_id)
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
