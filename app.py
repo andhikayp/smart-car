@@ -67,7 +67,7 @@ def inputmhs(Sangar):
     data = r.json()
     flag = data['flag']
     if(flag == "1"):
-        return 'Data '+nama+' berhasil dimasukkan\n'
+        return 'Data berhasil dimasukkan\n'
     elif(flag == "0"):
         return 'Data gagal dimasukkan\n'
 
