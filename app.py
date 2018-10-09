@@ -149,7 +149,7 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    if text=="HTML":
+    if text=="iqbal":
         inia="Hypertext"
         inib="telolet"
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=inia+inib))
