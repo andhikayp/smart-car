@@ -188,10 +188,11 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
         if isinstance(event.source, SourceGroup):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.push_message(event.source.group_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text='sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
             line_bot_api.leave_room(event.source.room_id)
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
