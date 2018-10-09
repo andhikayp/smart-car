@@ -42,19 +42,20 @@ notes = {}
 
 #REQUEST DATA MHS
 def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nrp=" + Id
+    URLmhs = "http://www.aditmasih.tk/api-hafid/show.php?nrp=" + nrp
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
     
     flag = data['flag']
     if(flag == "1"):
-        Id = data['data_angkatan'][0]['Id']
-        Sangar = data['data_angkatan'][0]['Sangar']
+        nrp = data['data_angkatan'][0]['nrp']
+        nama = data['data_angkatan'][0]['nama']
+        kos = data['data_angkatan'][0]['kosan']
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Id : "+Id+"\n"+Sangar+
+        data= "Nama : "+nama+"\nNrp : "+nrp+"\nKosan : "+kos
         return data
         # return all_data
 
@@ -62,12 +63,14 @@ def carimhs(nrp):
         return err
 
 #INPUT DATA MHS
-def inputmhs(Sangar):
-    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'Sangar': Sangar})
+def inputmhs(nrp, nama, kosan):
+    r = requests.post("http://www.aditmasih.tk/api-hafid/insert.php", data={'nrp': nrp, 'nama': nama, 'kosan': kosan})
     data = r.json()
+
     flag = data['flag']
+   
     if(flag == "1"):
-        return 'Data berhasil dimasukkan\n'
+        return 'Data '+nama+' berhasil dimasukkan\n'
     elif(flag == "0"):
         return 'Data gagal dimasukkan\n'
 
@@ -157,14 +160,21 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
     #if text=="5":
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text=(type)event.message.text))
-    data=text.split('-') #pemisah
+    data=text.split('-')
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
+    elif(data[0]=='hapus'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
+    elif(data[0]=='ganti'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
+    elif(data[0]=='semwa'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
     elif(data[0]=='menu'):
-        menu = "1. lihat-[nrp]\n2. tambah-[sangar]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
+        menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+    
     elif text=="/spam":
         i = 1
         while i < 999:
