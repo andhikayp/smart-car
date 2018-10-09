@@ -64,7 +64,7 @@ def carimhs(nrp):
 
 #INPUT DATA MHS
 def inputmhs(sangar):
-    r = requests.post("http://www.aditmasih.tk/api-hafid/insert.php", data={'sangar': sangar})
+    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'sangar': sangar})
     data = r.json()
     flag = data['flag']
     if(flag == "1"):
