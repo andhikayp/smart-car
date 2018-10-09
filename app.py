@@ -63,8 +63,8 @@ def carimhs(nrp):
         return err
 
 #INPUT DATA MHS
-def inputmhs(sangar):
-    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'sangar': sangar})
+def inputmhs(Sangar):
+    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'Sangar': Sangar})
     data = r.json()
     flag = data['flag']
     if(flag == "1"):
