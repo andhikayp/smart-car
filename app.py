@@ -54,7 +54,7 @@ def carimhs(nmr):
     
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Nama : "+nmr+"\nNrp : "+sangar
+        data= "Kesangaran ke-"+nmr+"\n"+sangar
         return data
         # return all_data
 
