@@ -42,20 +42,19 @@ notes = {}
 
 #REQUEST DATA MHS
 def carimhs(nrp):
-    URLmhs = "http://www.aditmasih.tk/api-hafid/show.php?nrp=" + nrp
+    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nrp=" + nmr
     r = requests.get(URLmhs)
     data = r.json()
     err = "data tidak ditemukan"
     
     flag = data['flag']
     if(flag == "1"):
-        nrp = data['data_angkatan'][0]['nrp']
-        nama = data['data_angkatan'][0]['nama']
-        kos = data['data_angkatan'][0]['kosan']
+        nmr = data['data_angkatan'][0]['nmr']
+        sangar = data['data_angkatan'][0]['sangar']
 
         # munculin semua, ga rapi, ada 'u' nya
         # all_data = data['data_angkatan'][0]
-        data= "Nama : "+nama+"\nNrp : "+nrp+"\nKosan : "+kos
+        data= "Id : "+nmr+"\n"+sangar+
         return data
         # return all_data
 
@@ -63,14 +62,14 @@ def carimhs(nrp):
         return err
 
 #INPUT DATA MHS
-def inputmhs(nrp, nama, kosan):
-    r = requests.post("http://www.aditmasih.tk/api-hafid/insert.php", data={'nrp': nrp, 'nama': nama, 'kosan': kosan})
+def inputmhs(nmr, sangar):
+    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'nmr': nmr, 'sangar': sangar})
     data = r.json()
 
     flag = data['flag']
    
     if(flag == "1"):
-        return 'Data '+nama+' berhasil dimasukkan\n'
+        return 'Data berhasil dimasukkan\n'
     elif(flag == "0"):
         return 'Data gagal dimasukkan\n'
 
@@ -164,7 +163,7 @@ def handle_message(event):
     if(data[0]=='lihat'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2],data[3])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
     elif(data[0]=='hapus'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
