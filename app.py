@@ -88,7 +88,7 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     teks = event.message.text
-    text = teks.lower()
+    text = teks.lower().strip()
     data=text.split('-')
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
@@ -142,7 +142,6 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Kata kunci "'+event.message.text+'" belum tersedia. Ketik "menu" untuk menampilkan semua kata kunci yang ada'))
-    #line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
     #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
     #line_bot_api.push_message('U8d343d76a1c15caad6dba2d2b5dab241', TextSendMessage(text='Hello World!'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
