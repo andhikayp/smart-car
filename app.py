@@ -87,7 +87,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    text = event.message.text.lower() #simplify for receove message
+    teks = event.message.text #simplify for receove message
+    text = teks.lower()
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
@@ -103,7 +104,7 @@ def handle_message(event):
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text=(type)event.message.text))
     data=text.split('-')
     if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=data[1]))
     elif(data[0]=='tambah'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
     elif(data[0]=='hapus'):
@@ -115,17 +116,16 @@ def handle_message(event):
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-    test=text.split('-')
-    #elif test[0]=="/spam":
-     #   i = 1
-      #  while i < 3:
-       #     if isinstance(event.source, SourceGroup):
-        #        line_bot_api.push_message(event.source.group_id,TextSendMessage(text=test[1]))
-         #   elif isinstance(event.source, SourceRoom):
-          #      line_bot_api.push_message(event.source.room_id,TextSendMessage(text=test[1]))
-           # else:
-            #    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=test[1]))
-            #i =i+1
+    elif (data[0]=='/spam'):
+        i = 1
+        while i < 3:
+            if isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
+            elif isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+            i =i+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
