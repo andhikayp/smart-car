@@ -87,8 +87,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    teks = event.message.text #simplify for receove message
-    text = teks.lower()
+    text = event.message.text.lower() #simplify for receove message
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
