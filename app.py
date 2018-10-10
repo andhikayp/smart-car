@@ -87,8 +87,9 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    teks = event.message.text #simplify for receove message
+    teks = event.message.text
     text = teks.lower()
+    data=text.split('-')
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
@@ -102,9 +103,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
     #if text=="5":
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text=(type)event.message.text))
-    data=text.split('-')
+    
     if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=data[1]))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
     elif(data[0]=='hapus'):
@@ -113,9 +114,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
     elif(data[0]=='semwa'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
-    elif(data[0]=='menu'):
-        menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+    elif(data[0]=='/sangar'):
+        pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
     elif (data[0]=='/spam'):
         i = 1
         while i < 3:
