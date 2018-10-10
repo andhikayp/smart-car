@@ -115,16 +115,16 @@ def handle_message(event):
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-    
-    elif text=="/spam":
+    test=text.split(' ')
+    elif test[0]=="/spam":
         i = 1
-        while i < 999:
+        while i < 3:
             if isinstance(event.source, SourceGroup):
-                line_bot_api.push_message(event.source.group_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=test[1]))
             elif isinstance(event.source, SourceRoom):
-                line_bot_api.push_message(event.source.room_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=test[1]))
             else:
-                line_bot_api.push_message(event.source.user_id,TextSendMessage(text="DIREAD DOANG, BALES WOI!"))
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=test[1]))
             i =i+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
