@@ -115,7 +115,7 @@ def handle_message(event):
     elif(data[0]=='menu'):
         menu = "1. lihat-[nrp]\n2. tambah-[nrp]-[nama]-[kosan]\n3. hapus-[nrp]\n4. ganti-[nrp lama]-[nrp baru]-[nama baru]-[kosan baru]\n5. semwa"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-    test=text.split(' ')
+    test=text.split('-')
     elif test[0]=="/spam":
         i = 1
         while i < 3:
