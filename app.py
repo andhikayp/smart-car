@@ -118,7 +118,7 @@ def handle_message(event):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
     elif (data[0]=='/spam'):
-        i = 1
+        i = int(data[2])
         while i < 3:
             if isinstance(event.source, SourceGroup):
                 line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
