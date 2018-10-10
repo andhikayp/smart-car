@@ -94,11 +94,7 @@ def handle_message(event):
     if text=="i":
         line_bot_api.push_message(event.source.room_id,TextSendMessage(text="apa"))
         line_bot_api.push_message(event.source.group_id,TextSendMessage(text="apa"))
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text="apa"))
-        if text=="a"
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text="iya"))
-        elif text=="b"
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text="tidak"))
+      
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
