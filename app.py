@@ -94,8 +94,8 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
     if text=="i":
-        line_bot_api.push_message(event.source.room_id,TextSendMessage(text="apa"))
-        line_bot_api.push_message(event.source.group_id,TextSendMessage(text="apa"))
+        g="apa "
+        line_bot_api.push_message(event.source.room_id,TextSendMessage(text=apa * 5))
       
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
