@@ -117,7 +117,10 @@ def handle_message(event):
     elif(data[0]=='semwa'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
-    #x=0
+    x=0
+    while x < 3:
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
     #for x in data:
     #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=x))
 
@@ -148,7 +151,7 @@ def handle_message(event):
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n"'+event.message.text+'\nKok gak jelas banget'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
 
 import os
