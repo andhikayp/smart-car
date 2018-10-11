@@ -117,13 +117,7 @@ def handle_message(event):
     elif(data[0]=='semwa'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
-    x=0
-    while x < 3:
-        if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-    #for x in data:
-    #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=x))
-
+   
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
@@ -150,9 +144,15 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
-    elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
+     #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
+    x=0
+    while x < 3:
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+    #for x in data:
+    #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=x))
 
 import os
 
