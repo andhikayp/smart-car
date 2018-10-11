@@ -131,16 +131,16 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
-    elif (data[0]=='/spamkata'):
-         x=1
-        while  x < len(data)+1:
-            if isinstance(event.source, SourceRoom):
-                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-            else if isinstance(event.source, SourceGroup):
-                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
-            else:
-                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[x]))
-            x=x+1
+    #elif (data[0]=='/spamkata'):
+     #    x=1
+      #  while  x < len(data)+1:
+       #     if isinstance(event.source, SourceRoom):
+        #        line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+         #   else if isinstance(event.source, SourceGroup):
+          #      line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
+           # else:
+            #    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[x]))
+            #x=x+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
