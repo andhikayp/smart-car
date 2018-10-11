@@ -89,7 +89,8 @@ def callback():
 def handle_message(event):
     teks = event.message.text
     text = teks.lower().strip()
-    data=text.split(' ')
+    data=text.split('-')
+    data2=text.split(' ')
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
@@ -129,16 +130,17 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
-    #elif (data[0]=='/spamkata'):
-     #    x=1
-      #  while  x <= len(data):
-       #     if isinstance(event.source, SourceRoom):
-        #        line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+    elif (data[0]=='/spamkata'):
+        x=1
+        while  x <= len(data):
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+            x=x+1
          #   else if isinstance(event.source, SourceGroup):
           #      line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
            # else:
             #    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[x]))
-            #x=x+1
+           
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
