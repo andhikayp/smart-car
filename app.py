@@ -89,7 +89,7 @@ def callback():
 def handle_message(event):
     teks = event.message.text
     text = teks.lower().strip()
-    data=text.split('-')
+    data=text.split(' ')
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
