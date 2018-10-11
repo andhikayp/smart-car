@@ -120,6 +120,7 @@ def handle_message(event):
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
+
     elif (data[0]=='/spam'):
         i = 0
         while i < int(data[2]):
@@ -130,14 +131,7 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
-    #elif (data[0]=='/spamkata'):
-    #x=0
-    #while  x < len(data):
-    #    if isinstance(event.source, SourceRoom):
-            #line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-            #x=x+1
-         #   
-           
+
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
@@ -154,16 +148,22 @@ def handle_message(event):
     #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
-    
-    x=1
-    while  x <= len(data):
+    elif (data[0]=='/spamkata'):
         if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-        else if isinstance(event.source, SourceGroup):
-            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
+        elif isinstance(event.source, SourceGroup):
+            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
         else:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[x]))
-        x=x+1 
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+        x=2
+        while  x <= len(data):
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data2[x]))
+            elif isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data2[x]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data2[x]))
+            x=x+1 
     #for x in data:
      #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
