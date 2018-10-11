@@ -131,11 +131,11 @@ def handle_message(event):
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
     #elif (data[0]=='/spamkata'):
-    x=0
-    while  x < len(data):
-        if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-            x=x+1
+    #x=0
+    #while  x < len(data):
+    #    if isinstance(event.source, SourceRoom):
+            #line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+            #x=x+1
          #   else if isinstance(event.source, SourceGroup):
           #      line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
            # else:
@@ -158,7 +158,11 @@ def handle_message(event):
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
     
-   
+    x=0
+    while  x < len(data):
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+        x=x+1 
     #for x in data:
      #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
