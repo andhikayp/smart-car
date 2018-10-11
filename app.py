@@ -96,7 +96,9 @@ def handle_message(event):
     if text=="i":
         g="apa "
         line_bot_api.push_message(event.source.room_id,TextSendMessage(text=apa))
-      
+    if text=="/menu":
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam' gawe nyepam wong sing mbok sayang\n3. '/bye' gawe ngetokno bot teko grup opo room"  
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
@@ -117,7 +119,7 @@ def handle_message(event):
 
     #x=0
     #for x in data:
-     #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=carimhs(data[x])))
+        #line_bot_api.push_message(event.source.user_id, TextSendMessage(text=carimhs(data[x])))
 
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
@@ -146,9 +148,7 @@ def handle_message(event):
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Kata kunci "'+event.message.text+'" belum tersedia. Ketik "menu" untuk menampilkan semua kata kunci yang ada'))
-    #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo '+profile.user_id+' '+profile.display_name+'\nKata Kunci Tidak Diketahui :) \nKetik "menu" untuk mengetahui menu yang tersedia'))
-    #line_bot_api.push_message('U8d343d76a1c15caad6dba2d2b5dab241', TextSendMessage(text='Hello World!'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n"'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
 
 import os
