@@ -150,7 +150,8 @@ def handle_message(event):
     x=0
     while x < 3:
         if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=carimhs(data[x])))
+            x++
     #for x in data:
     #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=x))
 
