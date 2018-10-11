@@ -147,13 +147,13 @@ def handle_message(event):
     #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
-    x=0
-    while x < 3:
-        if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=carimhs(data[x])))
-            x=x+1
-    #for x in data:
-    #    line_bot_api.push_message(event.source.user_id, TextSendMessage(text=x))
+    #x=0
+    #while x < 3:
+       # if isinstance(event.source, SourceRoom):
+       #     line_bot_api.push_message(event.source.room_id,TextSendMessage(text=carimhs(data[x])))
+      #  x=x+1
+    for x in data:
+        line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
 import os
 
