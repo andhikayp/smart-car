@@ -119,6 +119,10 @@ def allmhs():
             hasil=hasil+sangar
             hasil=hasil+"\n"
         return hasil
+
+def bingung(x):
+    return x[::-1]
+
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -215,14 +219,17 @@ def handle_message(event):
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data2[x]))
             x=x+1 
     
+    elif (data[0]=='/rev'):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
+
     x=0
     while  x <= len(data2):
         if isinstance(event.source, SourceRoom):
             line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
         elif isinstance(event.source, SourceGroup):
             line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
-        else:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
+        #else:
+            #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
         x=x+1     
 
 import os
