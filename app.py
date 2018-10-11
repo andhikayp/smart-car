@@ -60,6 +60,26 @@ def carimhs(nmr):
 
     elif(flag == "0"):
         return err
+
+def cari(jawa):
+    URLmhs = "http://www.aditmasih.tk/jaw/show.php?jawa=" + jawa
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    
+    flag = data['flag']
+    if(flag == "1"):
+        jawa = data['data_angkatan'][0]['jawa']
+        indo = data['data_angkatan'][0]['indo']
+    
+        # munculin semua, ga rapi, ada 'u' nya
+        # all_data = data['data_angkatan'][0]
+        data= jawa+" : "+indo
+        return data
+        # return all_data
+
+    elif(flag == "0"):
+        return err
 #INPUT DATA MHS
 def inputmhs(nmr, sangar):
     r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'nmr': nmr, 'sangar': sangar})
@@ -69,8 +89,19 @@ def inputmhs(nmr, sangar):
    
     if(flag == "1"):
         return 'Data berhasil dimasukkan\n'
-    #elif(flag == "0"):
-     #   return 'Data gagal dimasukkan\n'
+    elif(flag == "0"):
+        return 'Data gagal dimasukkan\n'
+
+def inputput(jawa, indo):
+    r = requests.post("http://www.aditmasih.tk/jaw/insert.php", data={'jawa': jawa, 'indo': indo})
+    data = r.json()
+
+    flag = data['flag']
+   
+    if(flag == "1"):
+        return 'Data berhasil dimasukkan\n'
+    elif(flag == "0"):
+        return 'Data gagal dimasukkan\n'
 
 def allmhs():
     r = requests.post("http://www.aditmasih.tk/api_andhika/all.php")
@@ -110,19 +141,27 @@ def handle_message(event):
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
 
+#MENAMPILKAN MENU
     if text=="/menu":
         menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-    
+
+#PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
-  
+
+#MENU SANGAR
+    elif(data[0]=='/sangar'):
+        pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
+
+#SUB MENU SANGAR
     if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cari(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputput(data[1],data[2])))
     elif(data[0]=='hapus'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
@@ -130,11 +169,7 @@ def handle_message(event):
     elif(data[0]=='kabeh'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
-   
-    elif(data[0]=='/sangar'):
-        pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
-
+#SPAM
     elif (data[0]=='/spam'):
         i = 0
         while i < int(data[2]):
@@ -146,6 +181,7 @@ def handle_message(event):
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
 
+#TINGGALKAN GROUP/ROOM
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
@@ -159,8 +195,11 @@ def handle_message(event):
             line_bot_api.leave_room(event.source.room_id)
         else: 
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
-    #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-     #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    
+#CHAT 1:1
+    elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
     elif (data2[0]=='/spamkata'):
         x=1
@@ -176,11 +215,11 @@ def handle_message(event):
     x=0
     while  x <= len(data2):
         if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=carimhs(data2[x])))
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
         elif isinstance(event.source, SourceGroup):
-            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=carimhs(data2[x])))
+            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
         else:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=carimhs(data2[x])))
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
         x=x+1     
     #for x in range:
      #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
