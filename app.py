@@ -159,15 +159,18 @@ def handle_message(event):
 
 #SUB MENU SANGAR
     if(data[0]=='lihat'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=cari(data[1])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputput(data[1],data[2])))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
     elif(data[0]=='hapus'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
     elif(data[0]=='kabeh'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+
+    elif(data[0]=='kamus'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputput(data[1],data[2])))
 
 #SPAM
     elif (data[0]=='/spam'):
@@ -221,11 +224,13 @@ def handle_message(event):
         else:
             line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
         x=x+1     
-    #for x in range:
-     #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
 import os
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
+
+#KENAPA KOK CUMAN TIPE INTEGER
+#KENAPA JAW GK ADA FITUR HAPUS
+#GMN BIAR GK MERETURN APAPUN
