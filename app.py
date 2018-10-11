@@ -127,7 +127,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
     elif(data[0]=='ganti'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
-    elif(data[0]=='semwa'):
+    elif(data[0]=='kabeh'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
    
@@ -172,7 +172,17 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data2[x]))
             x=x+1 
-    #for x in data:
+    
+    x=0
+    while  x <= len(data2):
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=carimhs(data2[x])))
+        elif isinstance(event.source, SourceGroup):
+            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=carimhs(data2[x])))
+        else:
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=carimhs(data2[x])))
+        x=x+1     
+    #for x in range:
      #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
 import os
