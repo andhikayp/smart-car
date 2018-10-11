@@ -69,8 +69,8 @@ def inputmhs(nmr, sangar):
    
     if(flag == "1"):
         return 'Data berhasil dimasukkan\n'
-    elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
+    #elif(flag == "0"):
+     #   return 'Data gagal dimasukkan\n'
 
 def allmhs():
     r = requests.post("http://www.aditmasih.tk/api_andhika/all.php")
