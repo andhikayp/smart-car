@@ -130,11 +130,11 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
-    elif (data[0]=='/spamkata'):
-        x=1
-        while  x <= len(data):
-            if isinstance(event.source, SourceRoom):
-                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+    #elif (data[0]=='/spamkata'):
+    x=0
+    while  x < len(data):
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
             x=x+1
          #   else if isinstance(event.source, SourceGroup):
           #      line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
