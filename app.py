@@ -72,7 +72,22 @@ def inputmhs(nmr, sangar):
     elif(flag == "0"):
         return 'Data gagal dimasukkan\n'
 
-
+def allmhs():
+    r = requests.post("http://www.aditmasih.tk/api_andhika/all.php")
+    data = r.json()
+    flag = data['flag']
+    if(flag == "1"):
+        hasil = ""
+        for i in range(0,len(data['data_angkatan'])):
+            nmr = data['data_angkatan'][int(i)][0]
+            sangar = data['data_angkatan'][int(i)][2]
+            hasil=hasil+str(i+1)
+            hasil=hasil+".\nKesangaran ke "
+            hasil=hasil+nmr
+            hasil=hasil+"\n"
+            hasil=hasil+sangar
+            hasil=hasil+"\n"
+        return hasil
 # Post Request
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -94,12 +109,11 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-    if text=="i":
-        g="apa "
-        line_bot_api.push_message(event.source.room_id,TextSendMessage(text=apa))
+
     if text=="/menu":
-        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata-[kalimat]' gawe nyepam sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+    
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
