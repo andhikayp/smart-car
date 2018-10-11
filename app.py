@@ -97,7 +97,7 @@ def handle_message(event):
         g="apa "
         line_bot_api.push_message(event.source.room_id,TextSendMessage(text=apa))
     if text=="/menu":
-        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam' gawe nyepam wong sing mbok sayang\n3. '/bye' gawe ngetokno bot teko grup opo room"  
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata-[kalimat]' gawe nyepam sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
@@ -131,6 +131,16 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
             i =i+1
+    elif (data[0]=='/spamkata'):
+         x=1
+        while  x < len(data)+1:
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
+            else if isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[x]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[x]))
+            x=x+1
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
@@ -147,11 +157,8 @@ def handle_message(event):
     #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
      #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
-    x=0
-    while  x < len(data):
-        if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[x]))
-        x=x+1
+    
+   
     #for x in data:
      #   line_bot_api.push_message(event.source.user_id, TextSendMessage(text=data[x]))
 
