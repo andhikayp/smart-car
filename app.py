@@ -150,12 +150,12 @@ def handle_message(event):
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
     elif (data[0]=='/spamkata'):
         if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]-data2))
         elif isinstance(event.source, SourceGroup):
-            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
+            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]-data2))
         else:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
-        x=2
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]-data2))
+        x=1
         while  x <= len(data):
             if isinstance(event.source, SourceRoom):
                 line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data2[x]))
