@@ -1,460 +1,243 @@
-
 from flask import Flask, request, abort
-
-
-
 from linebot import (
-
     LineBotApi, WebhookHandler
-
 )
-
 from linebot.exceptions import (
-
     InvalidSignatureError
-
 )
-
 from linebot.models import *
-
 import requests, json
 
-
-
-
-
 import errno
-
 import os
-
+#import datetime
 import sys, random
-
 import tempfile
-
-
+import requests
+import re
 
 from linebot.models import (
-
     MessageEvent, TextMessage, TextSendMessage,
-
     SourceUser, SourceGroup, SourceRoom,
-
     TemplateSendMessage, ConfirmTemplate, MessageAction,
-
     ButtonsTemplate, ImageCarouselTemplate, ImageCarouselColumn, URIAction,
-
     PostbackAction, DatetimePickerAction,
-
     CarouselTemplate, CarouselColumn, PostbackEvent,
-
     StickerMessage, StickerSendMessage, LocationMessage, LocationSendMessage,
-
     ImageMessage, VideoMessage, AudioMessage, FileMessage,
-
     UnfollowEvent, FollowEvent, JoinEvent, LeaveEvent, BeaconEvent,
-
     FlexSendMessage, BubbleContainer, ImageComponent, BoxComponent,
-
     TextComponent, SpacerComponent, IconComponent, ButtonComponent,
-
     SeparatorComponent,
-
 )
 
-
-
 app = Flask(__name__)
-
-
-
 # Channel Access Token
-
-line_bot_api = LineBotApi('YOUR CHANNEL ACCESS TOKEN')
-
+line_bot_api = LineBotApi('t5b5X0LHwCZQHy55X75+FZfjBWBDfvw+NWgDIruLX/EoslSALtJHPdaBsVRlkjFUeQRscNzXPtkTI8dYZH6I+ku1yyGazFjq8KShojdmcowVeXZYWNjkd7oT5nAxHZIK8q+lM/KR0DM+IwdyO5lyGQdB04t89/1O/w1cDnyilFU=')
 # Channel Secret
-
-handler = WebhookHandler('YOUR CHANEL SCREET')
+handler = WebhookHandler('b38e05865272e44156c19da5d5191c83')
 
 #===========[ NOTE SAVER ]=======================
-
 notes = {}
 
+#REQUEST DATA MHS
+def carimhs(nmr):
+    URLmhs = "http://www.aditmasih.tk/api_andhika/show.php?nmr=" + nmr
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    
+    flag = data['flag']
+    if(flag == "1"):
+        nmr = data['data_angkatan'][0]['nmr']
+        sangar = data['data_angkatan'][0]['sangar']
+    
+        # munculin semua, ga rapi, ada 'u' nya
+        # all_data = data['data_angkatan'][0]
+        data= "Kesangaran ke-"+nmr+"\n"+sangar
+        return data
+        # return all_data
 
+    elif(flag == "0"):
+        return err
+
+def cari(jawa):
+    URLmhs = "http://www.aditmasih.tk/jaw/show.php?jawa=" + jawa
+    r = requests.get(URLmhs)
+    data = r.json()
+    err = "data tidak ditemukan"
+    
+    flag = data['flag']
+    if(flag == "1"):
+        jawa = data['data_angkatan'][0]['jawa']
+        indo = data['data_angkatan'][0]['indo']
+    
+        # munculin semua, ga rapi, ada 'u' nya
+        # all_data = data['data_angkatan'][0]
+        data= jawa+" : "+indo
+        return data
+        # return all_data
+
+    elif(flag == "0"):
+        return err
+#INPUT DATA MHS
+def inputmhs(nmr, sangar):
+    r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'nmr': nmr, 'sangar': sangar})
+    data = r.json()
+
+    flag = data['flag']
+   
+    if(flag == "1"):
+        return 'Data berhasil dimasukkan\n'
+    elif(flag == "0"):
+        return 'Data gagal dimasukkan\n'
+
+def inputput(jawa, indo):
+    r = requests.post("http://www.aditmasih.tk/jaw/insert.php", data={'jawa': jawa, 'indo': indo})
+    data = r.json()
+
+    flag = data['flag']
+   
+    if(flag == "1"):
+        return 'Data berhasil dimasukkan\n'
+    elif(flag == "0"):
+        return 'Data gagal dimasukkan\n'
+
+def allmhs():
+    r = requests.post("http://www.aditmasih.tk/api_andhika/all.php")
+    data = r.json()
+    flag = data['flag']
+    if(flag == "1"):
+        hasil = ""
+        for i in range(0,len(data['data_angkatan'])):
+            nmr = data['data_angkatan'][int(i)][0]
+            sangar = data['data_angkatan'][int(i)][2]
+            hasil=hasil+str(i+1)
+            hasil=hasil+".\nKesangaran ke "
+            hasil=hasil+nmr
+            hasil=hasil+"\n"
+            hasil=hasil+sangar
+            hasil=hasil+"\n"
+        return hasil
+
+def bingung(x):
+    return x[::-1]
 
 # Post Request
-
 @app.route("/callback", methods=['POST'])
-
 def callback():
-
     signature = request.headers['X-Line-Signature']
-
     body = request.get_data(as_text=True)
-
     app.logger.info("Request body: " + body)
-
     try:
-
         handler.handle(body, signature)
-
     except InvalidSignatureError:
-
         abort(400)
-
     return 'OK'
 
-
-
 @handler.add(MessageEvent, message=TextMessage)
-
 def handle_message(event):
-
-    text = event.message.text #simplify for receove message
-
-    sender = event.source.user_id #get user_id
-
+    teks = event.message.text
+    text = teks.lower().strip()
+    data=text.split('-')
+    data2=text.split(' ')
+    sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
+    profile = line_bot_api.get_profile(sender)
 
-#=====[ LEAVE GROUP OR ROOM ]==========
+#MENAMPILKAN MENU
+    if text=="/menu":
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
-    if text == 'bye':
+#PENGEMBANGAN
+    if text=="rey":
+        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
+    if text=="Google Center":
+        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
 
+#MENU SANGAR
+    elif(data[0]=='/sangar'):
+        pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=pro))
+
+#SUB MENU SANGAR
+    if(data[0]=='lihat'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
+    elif(data[0]=='tambah'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
+    elif(data[0]=='hapus'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
+    elif(data[0]=='ganti'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
+    elif(data[0]=='kabeh'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+
+    elif(data[0]=='kamus'):
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputput(data[1],data[2])))
+
+#SPAM
+    elif (data[0]=='/spam'):
+        i = 0
+        while i < int(data[2]):
+            if isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
+            elif isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+            i =i+1
+is
+#TINGGALKAN GROUP/ROOM
+    elif text=="/bye":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
+    elif text=="/start":
         if isinstance(event.source, SourceGroup):
-
-            line_bot_api.reply_message(
-
-                event.reply_token, TextSendMessage(text='Leaving group'))
-
+            line_bot_api.push_message(event.source.group_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_group(event.source.group_id)
-
         elif isinstance(event.source, SourceRoom):
-
-            line_bot_api.reply_message(
-
-                event.reply_token, TextSendMessage(text='Leaving group'))
-
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
+            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_room(event.source.room_id)
-
-        else:
-
-            line_bot_api.reply_message(
-
-                event.reply_token,
-
-                TextSendMessage(text="Bot can't leave from 1:1 chat"))
-
-#=====[ TEMPLATE MESSAGE ]=============
-
-    elif text == '/template':
-
-        buttons_template = TemplateSendMessage(
-
-            alt_text='template',
-
-            template=ButtonsTemplate(
-
-                title='[ TEMPLATE MSG ]',
-
-                text= 'Tap the Button',
-
-                actions=[
-
-                    MessageTemplateAction(
-
-                        label='Culum 1',
-
-                        text='/aditmadzs'
-
-                    ),
-
-                    MessageTemplateAction(
-
-                        label='CULUM 2',
-
-                        text='/aditmadzs'
-
-                    ),
-
-                    MessageTemplateAction(
-
-                        label='CULUM 3',
-
-                        text='/aditmadzs'
-
-                    )
-
-                ]
-
-            )
-
-        )
-
-        
-
-        line_bot_api.reply_message(event.reply_token, buttons_template)
-
-#=====[ CAROUSEL MESSAGE ]==========
-
-    elif text == '/carousel':
-
-        message = TemplateSendMessage(
-
-            alt_text='OTHER MENU',
-
-            template=CarouselTemplate(
-
-                columns=[
-
-                    CarouselColumn(
-
-                        title='ADD ME',
-
-                        text='Contact Aditmadzs',
-
-                        actions=[
-
-                            URITemplateAction(
-
-                                label='>TAP HERE<',
-
-                                uri='https://line.me/ti/p/~bot_botv13'
-
-                            )
-
-                        ]
-
-                    ),
-
-                    CarouselColumn(
-
-                        title='Instagram',
-
-                        text='FIND ME ON INSTAGRAM',
-
-                        actions=[
-
-                            URITemplateAction(
-
-                                label='>TAP HERE!<',
-
-                                uri='http://line.me/ti/p/~bot_botv13'
-
-                            )
-
-                        ]
-
-                    )
-
-                ]
-
-            )
-
-        )
-
-        line_bot_api.reply_message(event.reply_token, message)
-
-#=====[ FLEX MESSAGE ]==========
-
-    elif text == 'flex':
-
-        bubble = BubbleContainer(
-
-            direction='ltr',
-
-            hero=ImageComponent(
-
-                url='https://lh5.googleusercontent.com/VoOmR6tVRwKEow0HySsJ_UdrQrqrpwUwSzQnGa0yBeqSex-4Osar2w-JohT6yPu4Vl4qchND78aU2c5a5Bhl=w1366-h641-rw',
-
-                size='full',
-
-                aspect_ratio='20:13',
-
-                aspect_mode='cover',
-
-                action=URIAction(uri='http://line.me/ti/p/~bot_botv13', label='label')
-
-            ),
-
-            body=BoxComponent(
-
-                layout='vertical',
-
-                contents=[
-
-                    # title
-
-                    TextComponent(text='Aditmadzs', weight='bold', size='xl'),
-
-                    # review
-
-                    BoxComponent(
-
-                        layout='baseline',
-
-                        margin='md',
-
-                        contents=[
-
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-
-                            IconComponent(size='sm', url='https://example.com/gold_star.png'),
-
-                            IconComponent(size='sm', url='https://example.com/grey_star.png'),
-
-                            TextComponent(text='4.0', size='sm', color='#999999', margin='md',
-
-                                          flex=0)
-
-                        ]
-
-                    ),
-
-                    # info
-
-                    BoxComponent(
-
-                        layout='vertical',
-
-                        margin='lg',
-
-                        spacing='sm',
-
-                        contents=[
-
-                            BoxComponent(
-
-                                layout='baseline',
-
-                                spacing='sm',
-
-                                contents=[
-
-                                    TextComponent(
-
-                                        text='Place',
-
-                                        color='#aaaaaa',
-
-                                        size='sm',
-
-                                        flex=1
-
-                                    ),
-
-                                    TextComponent(
-
-                                        text='Tangerang, Indonesia',
-
-                                        wrap=True,
-
-                                        color='#666666',
-
-                                        size='sm',
-
-                                        flex=5
-
-                                    )
-
-                                ],
-
-                            ),
-
-                            BoxComponent(
-
-                                layout='baseline',
-
-                                spacing='sm',
-
-                                contents=[
-
-                                    TextComponent(
-
-                                        text='Time',
-
-                                        color='#aaaaaa',
-
-                                        size='sm',
-
-                                        flex=1
-
-                                    ),
-
-                                    TextComponent(
-
-                                        text="10:00 - 23:00",
-
-                                        wrap=True,
-
-                                        color='#666666',
-
-                                        size='sm',
-
-                                        flex=5,
-
-                                    ),
-
-                                ],
-
-                            ),
-
-                        ],
-
-                    )
-
-                ],
-
-            ),
-
-            footer=BoxComponent(
-
-                layout='vertical',
-
-                spacing='sm',
-
-                contents=[
-
-                    # separator
-
-                    SeparatorComponent(),
-
-                    # websiteAction
-
-                    ButtonComponent(
-
-                        style='link',
-
-                        height='sm',
-
-                        action=URIAction(label='Aditmadzs', uri="https://line.me/ti/p/~bot_botv13")
-
-                    )
-
-                ]
-
-            ),
-
-        )
-
-        message = FlexSendMessage(alt_text="hello", contents=bubble)
-
-        line_bot_api.reply_message(
-
-            event.reply_token,
-
-            message
-
-        )
-
-#=======================================================================================================================
+        else: 
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
+    
+#CHAT 1:1
+    elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    
+    #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
+    elif (data2[0]=='/spamkata'):
+        x=1
+        while  x <= len(data2):
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data2[x]))
+            elif isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data2[x]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data2[x]))
+            x=x+1 
+    
+    elif (data[0]=='/rev'):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
+
+    x=0
+    while  x <= len(data2):
+        if isinstance(event.source, SourceRoom):
+            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
+        elif isinstance(event.source, SourceGroup):
+            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
+        #else:
+            #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
+        x=x+1     
 
 import os
 
 if __name__ == "__main__":
-
     port = int(os.environ.get('PORT', 5000))
-
     app.run(host='0.0.0.0', port=port)
+
+#KENAPA KOK CUMAN TIPE INTEGER
+#KENAPA JAW GK ADA FITUR HAPUS
+#GMN BIAR GK MERETURN APAPUN
