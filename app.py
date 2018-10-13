@@ -147,7 +147,7 @@ def handle_message(event):
 
 #MENAMPILKAN MENU
     if text=="/menu":
-        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room"  
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\n awakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 #PENGEMBANGAN
@@ -155,7 +155,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
-
+    if text=="/dev":
+        dev="Dikembangkan oleh Andhika Yoga Perdana\nInformatika ITS"
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=dev))
 #MENU SANGAR
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
@@ -179,14 +181,20 @@ def handle_message(event):
 #SPAM
     elif (data[0]=='/spam'):
         i = 0
-        while i < int(data[2]):
+        if(int(data[2])>25):
             if isinstance(event.source, SourceGroup):
-                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text="kakean woi, nggarakno server lemot ae"))
             elif isinstance(event.source, SourceRoom):
-                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
-            else:
-                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
-            i =i+1
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text="kakean woi, nggarakno server lemot ae"))
+        else:
+            while i < int(data[2]):
+                if isinstance(event.source, SourceGroup):
+                    line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
+                elif isinstance(event.source, SourceRoom):
+                    line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
+                #else:
+                #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+                i =i+1
 
 #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
@@ -232,6 +240,7 @@ def handle_message(event):
             #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
         x=x+1     
 
+#kicker.kickoutFromGroup(msg.to,[target])
 import os
 
 if __name__ == "__main__":
