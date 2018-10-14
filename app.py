@@ -147,7 +147,7 @@ def handle_message(event):
 
 #MENAMPILKAN MENU
     if text=="/menu":
-        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\n awakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
+        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 
 #PENGEMBANGAN
@@ -156,7 +156,7 @@ def handle_message(event):
     if text=="Google Center":
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
     if text=="/dev":
-        dev="Dikembangkan oleh Andhika Yoga Perdana\nInformatika ITS"
+        dev="Dikembangkan oleh Andhika Yoga Perdana, mahasiswa Informatika ITS, dengan menggunakan bahasa Python, PHP, dan mySQL"
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=dev))
 #MENU SANGAR
     elif(data[0]=='/sangar'):
@@ -181,7 +181,7 @@ def handle_message(event):
 #SPAM
     elif (data[0]=='/spam'):
         i = 0
-        if(int(data[2])>25):
+        if(int(data[2])>1000):
             if isinstance(event.source, SourceGroup):
                 line_bot_api.push_message(event.source.group_id,TextSendMessage(text="kakean woi, nggarakno server lemot ae"))
             elif isinstance(event.source, SourceRoom):
@@ -230,15 +230,15 @@ def handle_message(event):
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
 
-    x=0
-    while  x <= len(data2):
-        if isinstance(event.source, SourceRoom):
-            line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
-        elif isinstance(event.source, SourceGroup):
-            line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
+   # x=0
+    #while  x <= len(data2):
+     #   if isinstance(event.source, SourceRoom):
+      #      line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
+       # elif isinstance(event.source, SourceGroup):
+        #    line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
         #else:
             #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
-        x=x+1     
+        #x=x+1     
 
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
