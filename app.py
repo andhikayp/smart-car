@@ -195,7 +195,7 @@ def handle_message(event):
                 #else:
                 #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
-     elif text == '/template':
+    elif text =="/template":
         buttons_template = TemplateSendMessage(
             alt_text='template',
             template=ButtonsTemplate(
