@@ -195,7 +195,7 @@ def handle_message(event):
                 #else:
                 #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
-    elif text =="/template":
+    elif text =="menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
             template=CarouselTemplate(
@@ -203,9 +203,8 @@ def handle_message(event):
                 CarouselColumn(
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
                     actions=[
-                        PostbackAction(label='postback1', text='postback text1', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
-                        URIAction(label='uri1',uri='http://example.com/1')]),
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='gawe ndelok kesangaran wong-wong'),]),
                 CarouselColumn(
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='this is menu2',text='description2',
                     actions=[
