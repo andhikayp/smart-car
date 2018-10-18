@@ -155,9 +155,9 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
-    if text=="/dev":
-        dev="Dikembangkan oleh Andhika Yoga Perdana, mahasiswa Informatika ITS, dengan menggunakan bahasa Python, PHP, dan mySQL"
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=dev))
+    #if text=="/dev":
+     #   dev="Dikembangkan oleh Andhika Yoga Perdana, mahasiswa Informatika ITS, dengan menggunakan bahasa Python, PHP, dan mySQL"
+      #  line_bot_api.reply_message(event.reply_token, TextSendMessage(text=dev))
 #MENU SANGAR
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
@@ -216,26 +216,26 @@ def handle_message(event):
                 )
             )
         )
-    elif text =="/opo":
+    elif text =="/dev":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
         alt_text='Buttons template',
         template=ButtonsTemplate(
             thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',
-            title='Menu',
-            text='Please select',
+            title='PENGEMBANG',
+            text='Dikembangkan oleh Andhika Yoga Perdana, mahasiswa Informatika ITS, dengan menggunakan bahasa Python, PHP, dan mySQL',
             actions=[
                 PostbackAction(
-                    label='postback',
-                    text='postback text',
+                    label='Submenu saat ini',
+                    text='/dev',
                     data='action=buy&itemid=1'
                 ),
                 MessageAction(
-                    label='message',
-                    text='message text'
+                    label='Kembali ke menu',
+                    text='/menu'
                 ),
                 URIAction(
-                    label='uri',
-                    uri='http://example.com/'
+                    label='My Personal Website',
+                    uri='http://andhikay24.000webhostapp.com/'
                 )
             ]
         )
