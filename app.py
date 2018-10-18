@@ -204,7 +204,7 @@ def handle_message(event):
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text=''),
+                        MessageAction(label='message1'),
                         URIAction(label='uri1',uri='http://example.com/1')]),
                 CarouselColumn(
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='this is menu2',text='description2',
