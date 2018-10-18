@@ -204,7 +204,7 @@ def handle_message(event):
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1'),
+                        MessageAction(label='message1',text='message text1'),
                         URIAction(label='uri1',uri='http://example.com/1')]),
                 CarouselColumn(
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='this is menu2',text='description2',
@@ -216,7 +216,32 @@ def handle_message(event):
                 )
             )
         )
-#TINGGALKAN GROUP/ROOM
+    elif text =="/opo":
+        line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
+        alt_text='Buttons template',
+        template=ButtonsTemplate(
+            thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',
+            title='Menu',
+            text='Please select',
+            actions=[
+                PostbackAction(
+                    label='postback',
+                    text='postback text',
+                    data='action=buy&itemid=1'
+                ),
+                MessageAction(
+                    label='message',
+                    text='message text'
+                ),
+                URIAction(
+                    label='uri',
+                    uri='http://example.com/'
+                )
+            ]
+        )
+    )
+
+    #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Pingin ngekick aku?:(\nketik "/start" gawe ngekick!'))
     elif text=="/start":
