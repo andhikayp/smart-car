@@ -220,7 +220,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
         alt_text='Buttons template',
         template=ButtonsTemplate(
-            thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',
+            thumbnail_image_url='https://andhikay24.000webhostapp.com/IMG_20180805_103128.jpg',
             title='PENGEMBANG',
             text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
             actions=[
@@ -257,8 +257,8 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     
 #CHAT 1:1
-    elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
+     #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
     
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
     elif (data2[0]=='/spamkata'):
