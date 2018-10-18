@@ -155,9 +155,7 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
     if text=="Google Center":
         line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
-    #if text=="/dev":
-     #   dev="Dikembangkan oleh Andhika Yoga Perdana, mahasiswa Informatika ITS, dengan menggunakan bahasa Python, PHP, dan mySQL"
-      #  line_bot_api.reply_message(event.reply_token, TextSendMessage(text=dev))
+
 #MENU SANGAR
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
@@ -205,13 +203,37 @@ def handle_message(event):
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
-                        URIAction(label='uri1',uri='http://example.com/1')]),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    actions=[
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='message1',text='message text1'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    actions=[
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='message1',text='message text1'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    actions=[
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='message1',text='message text1'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    actions=[
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='message1',text='message text1'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='this is menu2',text='description2',
                     actions=[
                         PostbackAction(label='postback2',text='postback text2',data='action=buy&itemid=2'),
                         MessageAction(label='message2',text='message text2'),
-                        URIAction(label='uri2',uri='http://example.com/2')])
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')])
                     ]
                 )
             )
