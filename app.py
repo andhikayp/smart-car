@@ -239,7 +239,7 @@ def handle_message(event):
                 )
             ]
         )
-    )
+    ))
 
     #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
