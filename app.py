@@ -222,7 +222,7 @@ def handle_message(event):
         template=ButtonsTemplate(
             thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',
             title='PENGEMBANG',
-            text='aaojxao',
+            text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
             actions=[
                 PostbackAction(
                     label='Submenu saat ini',
