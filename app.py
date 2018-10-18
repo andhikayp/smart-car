@@ -199,37 +199,37 @@ def handle_message(event):
             template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    thumbnail_image_url='https://www.google.co.id/imgres?imgurl=https%3A%2F%2Fiyakan.com%2Fwp-content%2Fuploads%2F2017%2F06%2FCity-Tour-Selama-1-Hari-Di-Surabaya-Ini-Tempat-Tempat-Wisata-Murah-Yang-Bisa-Kamu-Kunjungi..jpg&imgrefurl=https%3A%2F%2Fiyakan.com%2Fcity-tour-wisata-surabaya%2F11127&docid=hUYed2NltmtPPM&tbnid=rTkAVPAGym6WBM%3A&vet=10ahUKEwiGiYTc0ZHeAhVLO48KHVv6B1wQMwhoKB0wHQ..i&w=509&h=768&safe=strict&bih=691&biw=1366&q=IKON%20SURABAYA&ved=0ahUKEwiGiYTc0ZHeAhVLO48KHVv6B1wQMwhoKB0wHQ&iact=mrc&uact=8', title='Menu 1', text='Penasaran?', 
+                    actions=[
+                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
+                        MessageAction(label='SAK PIRO SANGARMU?',text='/sangar'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 2', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 3', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 4', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 5', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='this is menu1', text='description1', 
-                    actions=[
-                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
-                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
-                CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='this is menu2',text='description2',
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='Menu 6',text='Penasaran?',
                     actions=[
                         PostbackAction(label='postback2',text='postback text2',data='action=buy&itemid=2'),
                         MessageAction(label='message2',text='message text2'),
