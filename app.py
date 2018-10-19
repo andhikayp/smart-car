@@ -146,11 +146,13 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
 
 #MENAMPILKAN MENU
-    #if text=="/menu":
-        menu="\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+    menu1="'/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang"  
+    menu2="'/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
+    menu3="'/bye' gawe ngetokno bot teko grup opo room"
     if text=="/spam":
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
+    if text=="/spamkata":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu2))
 #PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
