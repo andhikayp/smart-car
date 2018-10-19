@@ -146,10 +146,11 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
 
 #MENAMPILKAN MENU
-    if text=="/menu":
-        menu="1. '/sangar' gawe ndelok kesangaran wong-wong\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
+    #if text=="/menu":
+        menu="\n2. '/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang\n3. '/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
-
+    if text=="/spam":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu))
 #PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
@@ -193,7 +194,7 @@ def handle_message(event):
                 #else:
                 #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
-    elif text =="/apa":
+    elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
             template=CarouselTemplate(
@@ -269,7 +270,7 @@ def handle_message(event):
     elif text=="/start":
         if isinstance(event.source, SourceGroup):
             line_bot_api.push_message(event.source.group_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
-            line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
+            line_bot_api.push_message(event.source.group_id, TextSendMessage(text='Sepurane rek aku tinggal disek, aku bosen ng kene! GAK MENARIK blass cuk'))
             line_bot_api.leave_group(event.source.group_id)
         elif isinstance(event.source, SourceRoom):
             line_bot_api.push_message(event.source.room_id, TextSendMessage(text='Woy '+profile.display_name+', kurang ajar banget kon wani ngekick aku teko grup iki!'))
