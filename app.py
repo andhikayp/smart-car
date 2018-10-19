@@ -199,13 +199,13 @@ def handle_message(event):
             template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='andhikay24.000webhostapp.com/a.jpg', title='Menu 1', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/a.jpg', title='Menu 1', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='SAK PIRO SANGARMU?',text='/sangar'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='andhikay24.000webhostapp.com/b.jpg', title='Menu 2', text='Penasaran?', 
+                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 2', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='message1',text='message text1'),
