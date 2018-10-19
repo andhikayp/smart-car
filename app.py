@@ -199,40 +199,40 @@ def handle_message(event):
             template=CarouselTemplate(
             columns=[
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/a.jpg', title='Menu 1', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/a.jpg', title='Menu 1', text='Geser kanan', 
                     actions=[
                         PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
                         MessageAction(label='SAK PIRO SANGARMU?',text='/sangar'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 2', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/b.jpg', title='Menu 2', text='Penasaran?', 
                     actions=[
-                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
+                        PostbackAction(label='/spam', text='/spam', data='action=buy&itemid=1'),
+                        MessageAction(label='gawe nyepam sesuai input jumlah',text='/spam'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 3', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/c.jpg', title='Menu 3', text='Penasaran?', 
                     actions=[
-                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
+                        PostbackAction(label='/spamkata', text='/spamkata', data='action=buy&itemid=1'),
+                        MessageAction(label='gawe nyepam sebanyak kata sing diketik',text='/spamkata'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 4', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/d.jpg', title='Menu 4', text='Penasaran?', 
                     actions=[
-                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
+                        PostbackAction(label='/bye', text='/bye', data='action=buy&itemid=1'),
+                        MessageAction(label='gawe metu grup  opo room',text='/bye'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png', title='Menu 5', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 5', text='Penasaran?', 
                     actions=[
-                        PostbackAction(label='/sangar', text='/sangar', data='action=buy&itemid=1'),
-                        MessageAction(label='message1',text='message text1'),
+                        PostbackAction(label='/rev', text='/rev', data='action=buy&itemid=1'),
+                        MessageAction(label='ngewalik tulisan',text='/dev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',title='Menu 6',text='Penasaran?',
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 6',text='Geser kiri',
                     actions=[
-                        PostbackAction(label='postback2',text='postback text2',data='action=buy&itemid=2'),
-                        MessageAction(label='message2',text='message text2'),
+                        PostbackAction(label='/dev',text='/dev',data='action=buy&itemid=2'),
+                        MessageAction(label='ndelok pengembang',text='/dev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')])
                     ]
                 )
