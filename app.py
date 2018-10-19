@@ -274,10 +274,10 @@ def handle_message(event):
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
     
-    if(data2[0]=='apa'):
-        a=(randint(0, 10))
+    if(data2[0]=='apa' or data2[0]=='apakah' or data2[0]=='opo'):
+        a=random.randint(0, 10)
         hasil=["Iya", "Mungkin", "Bisa jadi", "Wajib", "Terserah", "Bebas", "Sembarang", "Sunnah", "Jangan", "Sak karepmu", "Tanya admin"]
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=a))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
     
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
