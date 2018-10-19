@@ -119,9 +119,9 @@ def handle_message(event):
     #tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
     menu1="'/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang"  
     menu2="'/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik" 
-
     menu3="'/bye' gawe ngetokno bot teko grup opo room"
     menu4="'/rev-[kalimat]' gawe ngewalik tulisan"
+
     if text=="/spam":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
     if text=="/spamkata":
@@ -273,7 +273,12 @@ def handle_message(event):
     
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
-
+    
+    if(data2[0]=='apa' or data2[0]=='apakah' or data2[0]=='opo'):
+        a=(randint(0, 10))
+        hasil=["Iya", "Mungkin", "Bisa jadi", "Wajib", "Terserah", "Bebas", "Sembarang", "Sunnah", "Jangan", "Sak karepmu", "Tanya admin"]
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
+    
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
 
