@@ -61,39 +61,9 @@ def carimhs(nmr):
     elif(flag == "0"):
         return err
 
-def cari(jawa):
-    URLmhs = "http://www.aditmasih.tk/jaw/show.php?jawa=" + jawa
-    r = requests.get(URLmhs)
-    data = r.json()
-    err = "data tidak ditemukan"
-    
-    flag = data['flag']
-    if(flag == "1"):
-        jawa = data['data_angkatan'][0]['jawa']
-        indo = data['data_angkatan'][0]['indo']
-    
-        # munculin semua, ga rapi, ada 'u' nya
-        # all_data = data['data_angkatan'][0]
-        data= jawa+" : "+indo
-        return data
-        # return all_data
-
-    elif(flag == "0"):
-        return err
 #INPUT DATA MHS
 def inputmhs(nmr, sangar):
     r = requests.post("http://www.aditmasih.tk/api_andhika/insert.php", data={'nmr': nmr, 'sangar': sangar})
-    data = r.json()
-
-    flag = data['flag']
-   
-    if(flag == "1"):
-        return 'Data berhasil dimasukkan\n'
-    elif(flag == "0"):
-        return 'Data gagal dimasukkan\n'
-
-def inputput(jawa, indo):
-    r = requests.post("http://www.aditmasih.tk/jaw/insert.php", data={'jawa': jawa, 'indo': indo})
     data = r.json()
 
     flag = data['flag']
@@ -146,13 +116,20 @@ def handle_message(event):
     profile = line_bot_api.get_profile(sender)
 
 #MENAMPILKAN MENU
+    #tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
     menu1="'/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang"  
-    menu2="'/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik\n4. '/bye' gawe ngetokno bot teko grup opo room\n5. '/rev-[kalimat]' gawe ngewalik tulisan\n6. '/dev' ndelok pengembang bot line iki\n7. tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
+    menu2="'/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik" 
+
     menu3="'/bye' gawe ngetokno bot teko grup opo room"
+    menu4="'/rev-[kalimat]' gawe ngewalik tulisan"
     if text=="/spam":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
     if text=="/spamkata":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu2))
+    if text=="/bye":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu3))
+    if text=="/rev":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu4))
 #PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
@@ -176,9 +153,6 @@ def handle_message(event):
     elif(data[0]=='kabeh'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
-    elif(data[0]=='kamus'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputput(data[1],data[2])))
-
 #SPAM
     elif (data[0]=='/spam'):
         i = 0
@@ -193,8 +167,8 @@ def handle_message(event):
                     line_bot_api.push_message(event.source.group_id,TextSendMessage(text=data[1]))
                 elif isinstance(event.source, SourceRoom):
                     line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
-                #else:
-                #   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+                else:
+                   line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
     elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
@@ -214,7 +188,7 @@ def handle_message(event):
                         MessageAction(label='GAWE NYEPAM',text='/spam'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/c.jpg', title='Menu 3', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/c.jpg', title='Menu 3', text='Geser terus!', 
                     actions=[
                         PostbackAction(label='/spamkata', text='/spamkata', data='action=buy&itemid=1'),
                         MessageAction(label='POKOKE NYEPAM',text='/spamkata'),
@@ -226,7 +200,7 @@ def handle_message(event):
                         MessageAction(label='GAWE LEFT',text='/bye'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 5', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 5', text='Akeh kan?', 
                     actions=[
                         PostbackAction(label='/rev', text='/rev', data='action=buy&itemid=1'),
                         MessageAction(label='NGEWALIK TULISAN',text='/rev'),
@@ -249,11 +223,6 @@ def handle_message(event):
             title='PENGEMBANG',
             text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
             actions=[
-                PostbackAction(
-                    label='Submenu saat ini',
-                    text='/dev',
-                    data='action=buy&itemid=1'
-                ),
                 MessageAction(
                     label='Kembali ke menu',
                     text='/menu'
@@ -261,6 +230,10 @@ def handle_message(event):
                 URIAction(
                     label='My Personal Website',
                     uri='http://andhikay24.000webhostapp.com/'
+                )
+                URIAction(
+                    label='My Project',
+                    uri='http://andhikay24.000webhostapp.com/portofolio.html/'
                 )
             ]
         )
@@ -298,17 +271,7 @@ def handle_message(event):
             x=x+1 
     
     elif (data[0]=='/rev'):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
-
-   # x=0
-    #while  x <= len(data2):
-     #   if isinstance(event.source, SourceRoom):
-      #      line_bot_api.push_message(event.source.room_id,TextSendMessage(text=cari(data2[x])))
-       # elif isinstance(event.source, SourceGroup):
-        #    line_bot_api.push_message(event.source.group_id,TextSendMessage(text=cari(data2[x])))
-        #else:
-            #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=cari(data2[x])))
-        #x=x+1     
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1]))) 
 
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
