@@ -208,31 +208,31 @@ def handle_message(event):
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/b.jpg', title='Menu 2', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/spam', text='/spam', data='action=buy&itemid=1'),
-                        MessageAction(label='gawe nyepam',text='/spam'),
+                        MessageAction(label='GAWE NYEPAM',text='/spam'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/c.jpg', title='Menu 3', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/spamkata', text='/spamkata', data='action=buy&itemid=1'),
-                        MessageAction(label='pokoke nyepam',text='/spamkata'),
+                        MessageAction(label='POKOKE NYEPAM',text='/spamkata'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/d.jpg', title='Menu 4', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/bye', text='/bye', data='action=buy&itemid=1'),
-                        MessageAction(label='gawe left',text='/bye'),
+                        MessageAction(label='GAWE LEFT',text='/bye'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 5', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/rev', text='/rev', data='action=buy&itemid=1'),
-                        MessageAction(label='ngewalik tulisan',text='/rev'),
+                        MessageAction(label='NGEWALIK TULISAN',text='/rev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 6',text='Geser kiri',
                     actions=[
                         PostbackAction(label='/dev',text='/dev',data='action=buy&itemid=2'),
-                        MessageAction(label='ndelok pengembang',text='/dev'),
+                        MessageAction(label='NDELOK PENGEMBANG',text='/dev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')])
                     ]
                 )
