@@ -223,6 +223,11 @@ def handle_message(event):
             title='PENGEMBANG',
             text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
             actions=[
+                PostbackAction(
+                    label='Submenu saat ini',
+                    text='/menu',
+                    data='action=buy&itemid=1'
+                ),
                 MessageAction(
                     label='Kembali ke menu',
                     text='/menu'
@@ -230,10 +235,6 @@ def handle_message(event):
                 URIAction(
                     label='My Personal Website',
                     uri='http://andhikay24.000webhostapp.com/'
-                )
-                URIAction(
-                    label='My Project',
-                    uri='http://andhikay24.000webhostapp.com/portofolio.html/'
                 )
             ]
         )
@@ -271,7 +272,7 @@ def handle_message(event):
             x=x+1 
     
     elif (data[0]=='/rev'):
-        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1]))) 
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
 
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
