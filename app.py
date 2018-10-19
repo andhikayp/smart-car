@@ -208,13 +208,13 @@ def handle_message(event):
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/b.jpg', title='Menu 2', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/spam', text='/spam', data='action=buy&itemid=1'),
-                        MessageAction(label='gawe nyepam sesuai input jumlah',text='/spam'),
+                        MessageAction(label='gawe nyepam',text='/spam'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/c.jpg', title='Menu 3', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/spamkata', text='/spamkata', data='action=buy&itemid=1'),
-                        MessageAction(label='gawe nyepam sebanyak kata sing diketik',text='/spamkata'),
+                        MessageAction(label='pokoke nyepam',text='/spamkata'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
                     thumbnail_image_url='https://andhikay24.000webhostapp.com/d.jpg', title='Menu 4', text='Penasaran?', 
