@@ -175,7 +175,7 @@ def handle_message(event):
 
     elif (data[0]=='/jodoh'):
         a=random.randint(0,20)
-        wes='Tingkat'+a+'sembarang'
+        wes='tingkat hubungan kalian '+str(a)+'%\nkalian berdua cocok dadi musuh'
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes))
     
 
