@@ -307,7 +307,7 @@ def handle_message(event):
         if isinstance(event.source, SourceGroup):
             profile = line_bot_api.get_profile(event.source.user_id)
             line_bot_api.reply_message( event.reply_token, [
-                    TextSendMessage(text='Display name: ' + @profile.display_name),
+                    TextSendMessage(text='@' +profile.display_name),
                     TextSendMessage(text='Status message: ' + profile.status_message)
                 ]
             )
