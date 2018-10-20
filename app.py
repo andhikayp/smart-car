@@ -107,7 +107,19 @@ def callback():
 
 @handler.add(JoinEvent)
 def handle_join(event):
-    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Joined this ' + event.source.type))
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo bro salam kenal, wes siap tak spam?...' + event.source.type))
+
+@handler.add(PostbackEvent)
+def handle_postback(event):
+    if event.postback.data == 'ping':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text='pong'))
+    elif event.postback.data == 'datetime_postback':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
+    elif event.postback.data == 'date_postback':
+        line_bot_api.reply_message(
+            event.reply_token, TextSendMessage(text=event.postback.params['date']))
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
@@ -173,6 +185,24 @@ def handle_message(event):
                     line_bot_api.push_message(event.source.room_id,TextSendMessage(text=data[1]))
                 else:
                    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
+                i =i+1
+
+#SPAM
+    elif (data[0]=='/spamsticker'):
+        i = 0
+        if(int(data[3])>1000):
+            if isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
+            elif isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
+        else:
+            while i < int(data[3]):
+                if isinstance(event.source, SourceGroup):
+                    line_bot_api.push_message(event.source.group_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
+                elif isinstance(event.source, SourceRoom):
+                    line_bot_api.push_message(event.source.room_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
+                else:
+                   line_bot_api.push_message(event.source.user_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
                 i =i+1
 
     elif(data[0]=='/jodoh'):
