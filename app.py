@@ -173,12 +173,23 @@ def handle_message(event):
                    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
 
-    elif (data[0]=='/jodoh'):
-        a=random.randint(0,20)
-        wes='tingkat hubungan kalian '+str(a)+'%\nkalian berdua cocok dadi musuh'
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes))
-    
-
+    elif(data[0]=='/jodoh'):
+        a=random.randint(1,100)
+        wes="tingkat hubungan kalian "+str(a)
+        if a<=20:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nkalian berdua cocok dadi musuh"))
+        elif a<=35:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nwoy "+data[1]+", koyoke cintamu bertepuk sebelah tangan"))
+        elif a<=50:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nwes ketok "+data[2]+" gaonok rasa nang awakmu"))
+        elif a<=65:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nlanjutno usahamu gawe ngejar dee, ojk nyerah"))
+        elif a<=80:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\n waduh ternyata "+data[2]+" onok rasa nang awakmu"))
+        elif a<=90:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nakeh sing nyenengi "+data[2]+" cepetan ndang ditembak daripada kena tikung"))
+        elif a<=100:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\n"+data[1]+" & "+data[2]+"pasangan yang sempurna"))
     elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
