@@ -190,6 +190,8 @@ def handle_message(event):
 #SPAM
     elif (data[0]=='/spamsticker'):
         i = 0
+        event.message.package_id=data[1]
+        event.message.sticker_id=data[2]
         if(int(data[3])>1000):
             if isinstance(event.source, SourceGroup):
                 line_bot_api.push_message(event.source.group_id,StickerSendMessage(package_id=event.message.package_id,sticker_id=event.message.sticker_id))
