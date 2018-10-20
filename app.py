@@ -122,6 +122,7 @@ def handle_message(event):
     menu3="'/bye' gawe ngetokno bot teko grup opo room"
     menu4="'/rev-[kalimat]' gawe ngewalik tulisan"
     menu5="awali pertanyaan dengan kata 'apa' / 'opo' / 'apakah'"
+    menu6="/jodoh-[namamu]-[nama pasangannmu] gawe ndelok prediksi hubunganmu, tapi ojok dipercoyo"
     if text=="/spam":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
     if text=="/spamkata":
@@ -132,6 +133,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu4))
     if text=="/ask":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu5))
+    if text=="/jodoh":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu6))
 #PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
@@ -183,13 +186,14 @@ def handle_message(event):
         elif a<=50:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nwes ketok "+data[2]+" gaonok rasa nang awakmu"))
         elif a<=65:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nlanjutno usahamu gawe ngejar dee, ojk nyerah"))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nlanjutno usahamu gawe ngejar dee, ojok nyerah"))
         elif a<=80:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\n waduh ternyata "+data[2]+" onok rasa nang awakmu"))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nwaduh ternyata "+data[2]+" onok rasa nang awakmu"))
         elif a<=90:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\nakeh sing nyenengi "+data[2]+" cepetan ndang ditembak daripada kena tikung"))
         elif a<=100:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\n"+data[1]+" & "+data[2]+"pasangan yang sempurna"))
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text=wes+"%\n"+data[1]+" & "+data[2]+" pasangan yang sempurna"))
+    
     elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
@@ -226,7 +230,19 @@ def handle_message(event):
                         MessageAction(label='NGEWALIK TULISAN',text='/rev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 6',text='Geser kiri',
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/g.jpg', title='Menu 6', text='Penasaran?', 
+                    actions=[
+                        PostbackAction(label='/ask', text='/ask', data='action=buy&itemid=1'),
+                        MessageAction(label='TANYA BOT',text='/ask'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/h.jpg', title='Menu 7', text='Akeh kan?', 
+                    actions=[
+                        PostbackAction(label='/jodoh', text='/jodoh', data='action=buy&itemid=1'),
+                        MessageAction(label='PREDIKSI PASANGAN',text='/jodoh'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 8',text='Geser kiri',
                     actions=[
                         PostbackAction(label='/dev',text='/dev',data='action=buy&itemid=2'),
                         MessageAction(label='NDELOK PENGEMBANG',text='/dev'),
@@ -295,8 +311,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
     
     if(data2[0]=='apa' or data2[0]=='apakah' or data2[0]=='opo'):
-        a=random.randint(0, 10)
-        hasil=["Iya", "Mungkin", "Bisa jadi", "Wajib", "Terserah", "Bebas", "Sembarang", "Sunnah", "Jangan", "Sak karepmu", "Tanya admin"]
+        a=random.randint(0, 18)
+        hasil=["iya", "mungkin", "bisa jadi", "wajib", "terserah", "bebas", "sembarang", "sunnah", "jangan", "sak karepmu", "tanya admin","kakean takok cuk", "apa urusan anda menanyakan hal itu kepada saya","silakan bertanya pada rumput yang bergoyang", "oh yo jelas", "pasti","mboh","lho yo iyo seh","entahlah"]
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
 
 #kicker.kickoutFromGroup(msg.to,[target])
