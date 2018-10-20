@@ -118,7 +118,7 @@ def handle_message(event):
     sender = event.source.user_id #get usesenderr_id
     gid = event.source.sender_id #get group_id
     profile = line_bot_api.get_profile(sender)
-
+    profile1= line_bot_api.get_group_member_profile(gid,sender)
 #MENAMPILKAN MENU
     #tiap ngetik ng grup opo room isok munculo terjemahan boso jowo\n\nawakmu bebas isok ngetik keyword nggawe huruf gede opo cilik"  
     menu1="'/spam-[kalimat]-[jumlah spam]' gawe nyepam wong sing mbok sayang"  
@@ -304,7 +304,7 @@ def handle_message(event):
     ))
 
     if text == 'prof':
-        line_bot_api.reply_message( event.reply_token, TextSendMessage(text="@"+profile.display_name))
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text="@"+profile1.display_name))
 
     #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
