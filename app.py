@@ -173,9 +173,9 @@ def handle_message(event):
                    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
 
-    elif(data[0]=='/jodoh'):
-        a=random.randint(1,100)
-        if a<=20:
+    elif (data[0]=='/jodoh'):
+        a=random.randint(1,20)
+        if (a<=20):
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\nkalian berdua cocok dadi musuh"))
         elif a<=40:
             line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
