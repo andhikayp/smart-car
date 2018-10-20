@@ -175,7 +175,7 @@ def handle_message(event):
 
     elif (data[0]=='/jodoh'):
         a=random.randint(0,20)
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='tingkat hubungan kalian '+a+'%'))
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='Tingkat hubungan kalian '+a+'persen. Kalian berdua cocok dadi musuh'))
     
 
     elif text =="/menu":
