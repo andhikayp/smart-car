@@ -109,18 +109,6 @@ def callback():
 def handle_join(event):
     line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Halo bro salam kenal, wes siap tak spam?...' + event.source.type))
 
-@handler.add(PostbackEvent)
-def handle_postback(event):
-    if event.postback.data == 'ping':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text='pong'))
-    elif event.postback.data == 'datetime_postback':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.postback.params['datetime']))
-    elif event.postback.data == 'date_postback':
-        line_bot_api.reply_message(
-            event.reply_token, TextSendMessage(text=event.postback.params['date']))
-
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     teks = event.message.text
@@ -139,6 +127,7 @@ def handle_message(event):
     menu4="'/rev-[kalimat]' gawe ngewalik tulisan"
     menu5="awali pertanyaan dengan kata 'apa' / 'opo' / 'apakah'"
     menu6="/jodoh-[namamu]-[nama pasangannmu] gawe ndelok prediksi hubunganmu, tapi ojok dipercoyo"
+    menu7="'/spamsticker-[package_id]-[sticker_id]-[jumlah spam]' gawe nyepam sticker. list sticker isok didelok ng link iki https://developers.line.me/media/messaging-api/sticker_list.pdf"
     if text=="/spam":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
     if text=="/spamkata":
@@ -151,7 +140,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu5))
     if text=="/jodoh":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu6))
-
+    if text=="/spamsticker":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu7))
 #MENU SANGAR
     elif(data[0]=='/sangar'):
         pro = "Wong suroboyo terkenal karo kesangarane. Sak piro sangarmu cak?\n1. lihat-[id]\n2. tambah-[id]-[kesangaran]\n3. hapus-[id]\n4. ganti-[id lama]-[id baru]-[kesangaran baru]\n5. kabeh"
@@ -162,12 +152,12 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=carimhs(data[1])))
     elif(data[0]=='tambah'):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=inputmhs(data[1],data[2])))
-    elif(data[0]=='hapus'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
-    elif(data[0]=='ganti'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
-    elif(data[0]=='kabeh'):
-        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
+    #elif(data[0]=='hapus'):
+     #   line_bot_api.reply_message(event.reply_token, TextSendMessage(text=hapusmhs(data[1])))
+    #elif(data[0]=='ganti'):
+     #   line_bot_api.reply_message(event.reply_token, TextSendMessage(text=updatemhs(data[1],data[2],data[3],data[4])))
+    #elif(data[0]=='kabeh'):
+     #   line_bot_api.reply_message(event.reply_token, TextSendMessage(text=allsmhs()))
 
 #SPAM
     elif (data[0]=='/spam'):
@@ -249,31 +239,37 @@ def handle_message(event):
                         MessageAction(label='POKOKE NYEPAM',text='/spamkata'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/d.jpg', title='Menu 4', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/i.jpg', title='Menu 4', text='Geser terus!', 
+                    actions=[
+                        PostbackAction(label='/spamsticker', text='/spamsticker', data='action=buy&itemid=1'),
+                        MessageAction(label='NYEPAM STICKER',text='/spamsticker'),
+                        URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
+                CarouselColumn(
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/d.jpg', title='Menu 5', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/bye', text='/bye', data='action=buy&itemid=1'),
                         MessageAction(label='GAWE LEFT',text='/bye'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 5', text='Akeh kan?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/e.jpg', title='Menu 6', text='Akeh kan?', 
                     actions=[
                         PostbackAction(label='/rev', text='/rev', data='action=buy&itemid=1'),
                         MessageAction(label='NGEWALIK TULISAN',text='/rev'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/g.jpg', title='Menu 6', text='Penasaran?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/g.jpg', title='Menu 7', text='Penasaran?', 
                     actions=[
                         PostbackAction(label='/ask', text='/ask', data='action=buy&itemid=1'),
                         MessageAction(label='TANYA BOT',text='/ask'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/h.jpg', title='Menu 7', text='Akeh kan?', 
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/h.jpg', title='Menu 8', text='Akeh kan?', 
                     actions=[
                         PostbackAction(label='/jodoh', text='/jodoh', data='action=buy&itemid=1'),
                         MessageAction(label='PREDIKSI PASANGAN',text='/jodoh'),
                         URIAction(label='Add line bot',uri='https://line.me/R/ti/p/%40gne0915s')]),
                 CarouselColumn(
-                    thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 8',text='Geser kiri',
+                    thumbnail_image_url='https://andhikay24.000webhostapp.com/f.jpg',title='Menu 9',text='Geser kiri',
                     actions=[
                         PostbackAction(label='/dev',text='/dev',data='action=buy&itemid=2'),
                         MessageAction(label='NDELOK PENGEMBANG',text='/dev'),
@@ -306,6 +302,15 @@ def handle_message(event):
             ]
         )
     ))
+
+    if text == 'profile':
+        if isinstance(event.source, SourceGroup):
+            profile = line_bot_api.get_profile(event.source.user_id)
+            line_bot_api.reply_message( event.reply_token, [
+                    TextSendMessage(text='Display name: ' + @profile.display_name),
+                    TextSendMessage(text='Status message: ' + profile.status_message)
+                ]
+            )
 
     #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
