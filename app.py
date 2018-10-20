@@ -121,7 +121,7 @@ def handle_message(event):
     menu2="'/spamkata [kalimat]' gawe nyepam tiap kata sebanyak kalimat sing diketik" 
     menu3="'/bye' gawe ngetokno bot teko grup opo room"
     menu4="'/rev-[kalimat]' gawe ngewalik tulisan"
-
+    menu5="awali pertanyaan dengan kata 'apa' / 'opo' / 'apakah'"
     if text=="/spam":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu1))
     if text=="/spamkata":
@@ -130,6 +130,8 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu3))
     if text=="/rev":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu4))
+    if text=="/ask":
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu5))
 #PENGEMBANGAN
     if text=="rey":
         line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
@@ -170,6 +172,23 @@ def handle_message(event):
                 else:
                    line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data[1]))
                 i =i+1
+
+    elif(data[0]=='/jodoh'):
+        a=random.randint(1,100)
+        if a<=20:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\nkalian berdua cocok dadi musuh"))
+        elif a<=40:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        elif a<=60:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        elif a<=70:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        elif a<=80:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        elif a<=90:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        elif a<=100:
+            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
     elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
@@ -278,7 +297,7 @@ def handle_message(event):
         a=random.randint(0, 10)
         hasil=["Iya", "Mungkin", "Bisa jadi", "Wajib", "Terserah", "Bebas", "Sembarang", "Sunnah", "Jangan", "Sak karepmu", "Tanya admin"]
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
-    
+
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
 
