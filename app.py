@@ -303,9 +303,9 @@ def handle_message(event):
         )
     ))
 
-    if text == 'profile':
+    if text == 'prof':
         profile = line_bot_api.get_profile(user_id)
-        line_bot_api.reply_message( event.reply_token, TextSendMessage(text='@' +profile.display_name))
+        line_bot_api.reply_message( event.reply_token, TextSendMessage(text=profile.user_id))
 
     #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
