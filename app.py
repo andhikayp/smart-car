@@ -105,6 +105,10 @@ def callback():
         abort(400)
     return 'OK'
 
+@handler.add(JoinEvent)
+def handle_join(event):
+    line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Joined this ' + event.source.type))
+
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     teks = event.message.text
@@ -135,11 +139,6 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu5))
     if text=="/jodoh":
         line_bot_api.reply_message(event.reply_token, TextSendMessage(text=menu6))
-#PENGEMBANGAN
-    if text=="rey":
-        line_bot_api.reply_message(event.reply_token,ImageSendMessage(original_content_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png',preview_image_url='https://azurlane.koumakan.jp/w/images/d/d8/San_Diego.png'))
-    if text=="Google Center":
-        line_bot_api.reply_message(event.reply_token,LocationSendMessage(title='Mountain View, California', address='United State of America',latitude=37.4225195,longitude=-122.0847433))
 
 #MENU SANGAR
     elif(data[0]=='/sangar'):
@@ -314,6 +313,7 @@ def handle_message(event):
         a=random.randint(0, 18)
         hasil=["iya", "mungkin", "bisa jadi", "wajib", "terserah", "bebas", "sembarang", "sunnah", "jangan", "sak karepmu", "tanya admin","kakean takok cuk", "apa urusan anda menanyakan hal itu kepada saya","silakan bertanya pada rumput yang bergoyang", "oh yo jelas", "pasti","mboh","lho yo iyo seh","entahlah"]
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
+
 
 #kicker.kickoutFromGroup(msg.to,[target])
 import os
