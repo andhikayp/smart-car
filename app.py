@@ -292,8 +292,8 @@ def handle_message(event):
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text="Mending blokiren aku daripada ngekick aku"))
     
 #CHAT 1:1
-    #elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
-     #   line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n'+event.message.text+'\nKok gak jelas banget'))
+    elif not(isinstance(event.source, SourceGroup) or isinstance(event.source, SourceRoom)):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='Hai,' +profile.display_name+'. Bahasa opo iki?\n"'+event.message.text+'"\nKok gak jelas banget'))
     
     #line_bot_api.multicast(['U8d343d76a1c15caad6dba2d2b5dab241'], TextSendMessage(text='Selamat Siang!'))
     elif (data2[0]=='/spamkata'):
@@ -322,6 +322,3 @@ if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))
     app.run(host='0.0.0.0', port=port)
 
-#KENAPA KOK CUMAN TIPE INTEGER
-#KENAPA JAW GK ADA FITUR HAPUS
-#GMN BIAR GK MERETURN APAPUN
