@@ -174,21 +174,10 @@ def handle_message(event):
                 i =i+1
 
     elif (data[0]=='/jodoh'):
-        a=random.randint(1,20)
-        if (a<=20):
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\nkalian berdua cocok dadi musuh"))
-        elif a<=40:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
-        elif a<=60:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
-        elif a<=70:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
-        elif a<=80:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
-        elif a<=90:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
-        elif a<=100:
-            line_bot_api.reply_message(event.reply_token, TextSendMessage(text="tingkat hubungan kalian "+a+"%\n"))
+        a=random.randint(0,20)
+        line_bot_api.reply_message(event.reply_token, TextSendMessage(text='tingkat hubungan kalian '+a+'%\nkalian berdua cocok dadi musuh'))
+    
+
     elif text =="/menu":
         line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
             alt_text='Carousel template',
