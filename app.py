@@ -336,7 +336,8 @@ def handle_message(event):
     
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
-    
+    elif (text=='test'):
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masok pak eko"))
     if(data2[0]=='apa' or data2[0]=='apakah' or data2[0]=='opo'):
         a=random.randint(0, 18)
         hasil=["iya", "mungkin", "bisa jadi", "wajib", "terserah", "bebas", "sembarang", "sunnah", "jangan", "sak karepmu", "tanya admin","kakean takok cuk", "apa urusan anda menanyakan hal itu kepada saya","silakan bertanya pada rumput yang bergoyang", "oh yo jelas", "pasti","mboh","lho yo iyo seh","entahlah"]
