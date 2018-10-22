@@ -336,7 +336,7 @@ def handle_message(event):
     
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
-    elif (text=='test'):
+    elif (text=='test' or text=='tes'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text="masok pak eko"))
     if(data2[0]=='apa' or data2[0]=='apakah' or data2[0]=='opo'):
         a=random.randint(0, 18)
