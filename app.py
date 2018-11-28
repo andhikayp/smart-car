@@ -333,7 +333,18 @@ def handle_message(event):
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text=data2[x]))
             x=x+1 
-    
+
+    elif (data2[0]=='ping'):
+        x=1
+        while  x <= 100:
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text="Reply from 216.239.38.120: bytes=32 time=31ms TTL=52"))
+            elif isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text="Reply from 216.239.38.120: bytes=32 time=31ms TTL=52"))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text="Reply from 216.239.38.120: bytes=32 time=31ms TTL=52"))
+            x=x+1 
+
     elif (data[0]=='/rev'):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=bingung(data[1])))
     elif (text=='test' or text=='tes'):
