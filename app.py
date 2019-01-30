@@ -383,9 +383,9 @@ def handle_message(event):
         "ANGELA TANK", 
         "JOHNSON NABRAK",
         "BUTA MAP"]
+        a=random.randint(0, 14)
         x=1
         while  x <= 100:
-            a=random.randint(0, 14)
             line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
             x=x+1 
 
