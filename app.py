@@ -386,7 +386,12 @@ def handle_message(event):
         a=random.randint(0, 14)
         x=1
         while  x <= 100:
-            line_bot_api.push_message(event.reply_token,TextSendMessage(text=hasil[a]))
+            if isinstance(event.source, SourceRoom):
+                line_bot_api.push_message(event.source.room_id,TextSendMessage(text=hasil[a]))
+            elif isinstance(event.source, SourceGroup):
+                line_bot_api.push_message(event.source.group_id,TextSendMessage(text=hasil[a]))
+            else:
+                line_bot_api.push_message(event.source.user_id,TextSendMessage(text=hasil[a]))
             x=x+1 
 
     elif (data[0]=='/rev'):
