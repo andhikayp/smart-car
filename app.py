@@ -300,30 +300,30 @@ def handle_message(event):
                 )
             )
         )
-    elif text =="/dev":
-        line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
-        alt_text='Buttons template',
-        template=ButtonsTemplate(
-            thumbnail_image_url='https://andhikay24.000webhostapp.com/IMG_20180805_103128.jpg',
-            title='PENGEMBANG',
-            text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
-            actions=[
-                PostbackAction(
-                    label='Submenu saat ini',
-                    text='/menu',
-                    data='action=buy&itemid=1'
-                ),
-                MessageAction(
-                    label='Kembali ke menu',
-                    text='/menu'
-                ),
-                URIAction(
-                    label='My Personal Website',
-                    uri='http://andhikay24.000webhostapp.com/'
-                )
-            ]
-        )
-    ))
+    # elif text =="/dev":
+    #     line_bot_api.reply_message(event.reply_token, TemplateSendMessage(
+    #     alt_text='Buttons template',
+    #     template=ButtonsTemplate(
+    #         thumbnail_image_url='https://andhikay24.000webhostapp.com/IMG_20180805_103128.jpg',
+    #         title='PENGEMBANG',
+    #         text='Andhika Yoga Perdana, Mahasiswa Informatika ITS',
+    #         actions=[
+    #             PostbackAction(
+    #                 label='Submenu saat ini',
+    #                 text='/menu',
+    #                 data='action=buy&itemid=1'
+    #             ),
+    #             MessageAction(
+    #                 label='Kembali ke menu',
+    #                 text='/menu'
+    #             ),
+    #             URIAction(
+    #                 label='My Personal Website',
+    #                 uri='http://andhikay24.000webhostapp.com/'
+    #             )
+    #         ]
+    #     )
+    # ))
 
     #TINGGALKAN GROUP/ROOM
     elif text=="/bye":
@@ -365,6 +365,28 @@ def handle_message(event):
                 line_bot_api.push_message(event.source.group_id,TextSendMessage(text="Reply from 216.239.38.120: bytes=32 time=31ms TTL=52"))
             else:
                 line_bot_api.push_message(event.source.user_id,TextSendMessage(text="Reply from 216.239.38.120: bytes=32 time=31ms TTL=52"))
+            x=x+1 
+
+    elif (data2[0]=='wxo'):
+        hasil=["BACOT", 
+        "BOCAH", 
+        "KALAHAN", 
+        "FEEDER", 
+        "EMOSIAN", 
+        "HAHAHAHAHA", 
+        "TEROR TERUS", 
+        "AYO MABAR", 
+        "BANTAI SQUAD IoS", 
+        "TAKUT KALAH", 
+        "WINRATE < 50%",
+        "MINO NUUB", 
+        "ANGELA TANK", 
+        "JOHNSON NABRAK",
+        "BUTA MAP"]
+        x=1
+        while  x <= 100:
+            a=random.randint(0, 14)
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=hasil[a]))
             x=x+1 
 
     elif (data[0]=='/rev'):
