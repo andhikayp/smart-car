@@ -383,9 +383,9 @@ def handle_message(event):
         "ANGELA TANK", 
         "JOHNSON NABRAK",
         "BUTA MAP"]
-        a=random.randint(0, 14)
         x=1
         while  x <= 100:
+            a=random.randint(0, 14)
             if isinstance(event.source, SourceRoom):
                 line_bot_api.push_message(event.source.room_id,TextSendMessage(text=hasil[a]))
             elif isinstance(event.source, SourceGroup):
